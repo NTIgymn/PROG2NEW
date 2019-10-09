@@ -7,7 +7,11 @@ public class kalkex1 {
 
         public static void main(String[] args){
 
-
+            //knapparnas layout
+            JPanel panel = new JPanel();
+            panel.setLayout(new GridLayout(4,3));
+            //knappar till panel
+            addButtons(panel, "7", "8", "9","4","5","6","1","2","3","+","-","=" );
 
         }
 
