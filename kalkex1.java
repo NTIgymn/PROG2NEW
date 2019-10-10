@@ -7,6 +7,17 @@ public class kalkex1 {
 
         public static void main(String[] args){
 
+            // frame
+            JFrame frame = new JFrame();
+
+            // frame.setTitle("Calclayout");
+            //panel och dens layout
+
+
+            JTextField tf = new JTextField("tf");
+            tf.setEditable(true);
+
+
             //knapparnas layout
             JPanel panel = new JPanel();
             panel.setLayout(new GridLayout(4,3));
