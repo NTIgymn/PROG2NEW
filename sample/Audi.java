@@ -5,16 +5,16 @@ package sample;
          super(owner);
      }
 
-     @Override
+   //  @Override
      public void engine() {
          System.out.println("this audi's engine is v10");
      }
 
-     @Override
+  //   @Override
      public void color() {
          System.out.println("This audi's color is black");
      }
-     @Override
+   //  @Override
      public void name(){
          System.out.println("This audi's name is R8");
      }

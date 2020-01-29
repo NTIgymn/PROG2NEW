@@ -7,7 +7,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.lang.String;
 import java.util.ArrayList;
@@ -15,50 +14,51 @@ import java.util.ArrayList;
 public class Calculator2 extends Application {
 
     TextField inputField;
-    TextField inputField1;
     ArrayList<Button> numpad;
     GridPane numpadLayout;
     HBox utilContainer;
     BorderPane mainLayout;
     VBox displayLayout;
-    int result = 0;
-    int num2;
+    float num1;
+    float num2;
     String op;
-    Text outputField;
+
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Calc");
 
         initField();
-        displayLayout.getChildren().add(outputField);
+
         displayLayout.getChildren().add(inputField);
-        populateNumpad();
+        numpad();
         calculate();
-        displayNunmpadButtons();
+        displayButtons();
 
         mainLayout.setTop(displayLayout);
         mainLayout.setCenter(numpadLayout);
         mainLayout.setBottom(utilContainer);
 
-        Scene scene = new Scene(mainLayout, 300, 250);
+        Scene scene = new Scene(mainLayout, 190, 190);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     private void initField() {
         inputField = new TextField();
-        outputField = new Text(" ");
-        numpad = new ArrayList<Button>();
+        numpad = new ArrayList<>();
         numpadLayout = new GridPane();
         utilContainer = new HBox();
         displayLayout = new VBox();
         mainLayout = new BorderPane();
+        inputField.setEditable(false);
     }
 
-    private void displayNunmpadButtons() {
+    private void displayButtons() {
         int buttonIndex = 0;
-        for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
-            for (int columnIndex = 0; columnIndex < 4; columnIndex++) {
+        for (int rowIndex = 0; rowIndex < 4; rowIndex++) {
+            for (int columnIndex = 0; columnIndex < 5; columnIndex++) {
                 numpadLayout.add(numpad.get(buttonIndex), columnIndex, rowIndex);
                 buttonIndex++;
                 if (buttonIndex == numpad.size())
@@ -67,8 +67,8 @@ public class Calculator2 extends Application {
         }
     }
 
-    private void populateNumpad() {
-        char[] buttons = new char[]{'c', ' ', ' ', '+', '1', '2', '3', '-', '4', '5', '6', '*', '7', '8', '9', '/', '0', ',', ' ', '=', };
+    private void numpad() {
+        char[] buttons = new char[]{'1', '2', '3', '+', '*', '4', '5', '6', '/', '^', '7', '8', '9', '=', 'c' ,'.','0','%'};
 
         for (char key : buttons) {
             String keyText = key + "";
@@ -78,6 +78,8 @@ public class Calculator2 extends Application {
                 inputField.textProperty().set(inputField.textProperty().get() + keyText);
             });*/
             numpad.add(tempButton);
+            tempButton.setMinHeight(40);
+            tempButton.setMinWidth(40);
         }
     }
 
@@ -86,16 +88,13 @@ public class Calculator2 extends Application {
      */
     private void calculate (){
 
-        for (int i = 0; i<numpad.size(); i++){
+        for (Button clickedButton : numpad) {
 
 
-            Button clickedButton = numpad.get(i);
+            clickedButton.setOnAction(event -> {
 
 
-            numpad.get(i).setOnAction(event -> {
-
-
-                switch (clickedButton.getId()){
+                switch (clickedButton.getId()) {
 
                     case "0":
                     case "1":
@@ -107,77 +106,82 @@ public class Calculator2 extends Application {
                     case "7":
                     case "8":
                     case "9":
-
-                      inputField.textProperty().set(inputField.textProperty().get() + clickedButton.getId());
+                    case ".":
+                        inputField.textProperty().set(inputField.textProperty().get() + clickedButton.getId());
                         break;
                     case "+":
-                        num2 = Integer.parseInt(inputField.textProperty().get());
-                        outputField.setText(outputField.getText() + inputField.textProperty().get() + clickedButton.getId());
+
+                        num1 = Float.parseFloat(inputField.textProperty().get());
                         op = "+";
-                        result = result + num2;
                         inputField.textProperty().set("");
+
                         break;
 
                     case "-":
-                        num2 = Integer.parseInt(inputField.textProperty().get());
-                        outputField.setText(outputField.getText() + inputField.textProperty().get() + clickedButton.getId());
+                        num1 = Float.parseFloat(inputField.textProperty().get());
                         op = "-";
-                        result = result - num2;
                         inputField.textProperty().set("");
                         break;
 
                     case "*":
-                        result = Integer.parseInt(inputField.textProperty().get());
+                        num1 = Float.parseFloat(inputField.textProperty().get());
                         op = "*";
                         inputField.textProperty().set("");
                         break;
                     case "/":
-                        result = Integer.parseInt(inputField.textProperty().get());
+                        num1 = Float.parseFloat(inputField.textProperty().get());
                         op = "/";
+                        inputField.textProperty().set("");
+                        break;
+                   case "^":
+                        num1 = Float.parseFloat(inputField.textProperty().get());
+                        op = "^";
                         inputField.textProperty().set("");
                         break;
 
                     case "=":
-                        //num2 = Integer.parseInt(inputField.textProperty().get());
-                        inputField.textProperty().set(Integer.toString(result));
-                        outputField.textProperty().set(outputField.textProperty().get() + "=" + result );
-                        /*
-                        switch(op){
+                        num2 = Float.parseFloat(inputField.textProperty().get());
+                        System.out.println(inputField.textProperty().get());
+
+                    case "%":
+                        num2 = Float.parseFloat(inputField.textProperty().get());
+                        op ="%";
+                        System.out.println(inputField.textProperty().get());
+
+
+                        switch (op) {
                             case "+":
-                                inputField.textProperty().set( Integer.toString(num1 + num2));
+
+                                inputField.textProperty().set(Float.toString(num1 + num2));
                                 break;
 
                             case "-":
-                                int result = num1 - num2;
-                                inputField.textProperty().set( Integer.toString(result));
-                                System.out.println(op + " " + num1 + " "+ num2);
+                                float result = num1 - num2;
+                                inputField.textProperty().set(Float.toString(result));
+                                System.out.println(op + " " + num1 + " " + num2);
                                 break;
 
                             case "*":
-                                inputField.textProperty().set( Integer.toString(num1 * num2));
+                                inputField.textProperty().set(Float.toString(num1 * num2));
                                 break;
                             case "/":
-                                inputField.textProperty().set( Integer.toString(num1 / num2));
+                                inputField.textProperty().set(Float.toString(num1 / num2));
                                 break;
+                            case "^":
+                                inputField.textProperty().set(Float.toString((float) Math.pow(num1, num2)));
+                                break;
+                            case "%":
+                                inputField.textProperty().set(Float.toString(num1 * num2 / 100));
                         }
-                        */
+
                         break;
-
-
                     case "c":
-                        result = 0;
+                        num1 = 0;
                         num2 = 0;
                         op = "";
-                        outputField.setText("");
                         inputField.textProperty().set("");
                         break;
                 }
-
-
-
-
-
-
 
 
             });

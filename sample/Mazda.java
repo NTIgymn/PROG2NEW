@@ -5,16 +5,16 @@ class Mazda extends Car {
         super(owner);
     }
 
-    @Override
+  //  @Override
     public void engine() {
         System.out.println("this mazda has a 1.6 L (98 cu in) inline-four engine ");
     }
 
-    @Override
+ //   @Override
     public void color() {
         System.out.println("This mazda's color is red");
     }
-    @Override
+  //  @Override
     public void name(){
         System.out.println("This mazda's name is MX5 aka mazda miata");
     }

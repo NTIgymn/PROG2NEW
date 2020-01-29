@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.lang.String;
 import java.util.ArrayList;
 
+
 public class Calculator extends Application {
 
     TextField inputField;
@@ -22,6 +23,9 @@ public class Calculator extends Application {
     float num1;
     float num2;
     String op;
+
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Calc");
@@ -37,7 +41,7 @@ public class Calculator extends Application {
         mainLayout.setCenter(numpadLayout);
         mainLayout.setBottom(utilContainer);
 
-        Scene scene = new Scene(mainLayout, 90, 125);
+        Scene scene = new Scene(mainLayout, 190, 190);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -74,7 +78,11 @@ public class Calculator extends Application {
             /*tempButton.setOnAction(event -> {
                 inputField.textProperty().set(inputField.textProperty().get() + keyText);
             });*/
+
             numpad.add(tempButton);
+            tempButton.setMinHeight(100);
+            tempButton.setMinWidth(100);
+
         }
     }
 
