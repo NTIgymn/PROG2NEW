@@ -58,7 +58,7 @@ public class Calculator extends Application {
 
     private void displayButtons() {
         int buttonIndex = 0;
-        for (int rowIndex = 0; rowIndex < 4; rowIndex++) {
+        for (int rowIndex = 0; rowIndex < 5; rowIndex++) {
             for (int columnIndex = 0; columnIndex < 4; columnIndex++) {
                 numpadLayout.add(numpad.get(buttonIndex), columnIndex, rowIndex);
                 buttonIndex++;
@@ -69,7 +69,7 @@ public class Calculator extends Application {
     }
 
     private void numpad() {
-        char[] buttons = new char[]{'1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '.', '0', '=' ,'c','/'};
+        char[] buttons = new char[]{'1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '*', '.', '0', '=' ,'c','/','%','^'};
 
         for (char key : buttons) {
             String keyText = key + "";
@@ -116,7 +116,7 @@ public class Calculator extends Application {
 
                         num1 = Float.parseFloat(inputField.textProperty().get());
                         op = "+";
-                         inputField.textProperty().set("");
+                        inputField.textProperty().set("");
 
                         break;
 
@@ -136,11 +136,16 @@ public class Calculator extends Application {
                         op = "/";
                         inputField.textProperty().set("");
                         break;
-                 /*   case "^":
+                    case "^":
                         num1 = Float.parseFloat(inputField.textProperty().get());
                         op = "^";
                         inputField.textProperty().set("");
-                        break; */
+                        break;
+                    case "%":
+                        num1 = Float.parseFloat(inputField.textProperty().get());
+                        op = "%";
+                        inputField.textProperty().set("");
+                        break;
 
                     case "=":
                         num2 = Float.parseFloat(inputField.textProperty().get());
@@ -165,9 +170,12 @@ public class Calculator extends Application {
                             case "/":
                                 inputField.textProperty().set(Float.toString(num1 / num2));
                                 break;
-                         /*   case "^":
+                            case "^":
                                 inputField.textProperty().set(Float.toString((float) Math.pow(num1, num2)));
-                                break; */
+                                break;
+                            case "%":
+                                inputField.textProperty().set(Float.toString(num1 * num2 /100));
+                                break;
                         }
 
                         break;
@@ -177,6 +185,7 @@ public class Calculator extends Application {
                         op = "";
                         inputField.textProperty().set("");
                         break;
+
                 }
 
 
