@@ -7,7 +7,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.awt.*;
 import java.lang.String;
 import java.util.ArrayList;
 
@@ -78,7 +83,7 @@ public class Calculator extends Application {
             /*tempButton.setOnAction(event -> {
                 inputField.textProperty().set(inputField.textProperty().get() + keyText);
             });*/
-
+            tempButton.setFont(Font.font(30));
             numpad.add(tempButton);
             tempButton.setMinHeight(100);
             tempButton.setMinWidth(100);
